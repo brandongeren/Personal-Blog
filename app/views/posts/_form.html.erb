@@ -1,0 +1,32 @@
+
+<!-- This is a partial. It's a portion of a page's full HTML 
+and it's reusable across multiple views (new and edit) -->
+<%= simple_form_for @post do |f| %>
+	<% if @post.errors.any? %>
+		<div id="error_explanation">
+			<h2>
+				<%= "#{pluralize(@post.errors.count, "error")} prevented this post from saving:" %>
+			</h2>
+			<ul>
+				<% @post.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="form-group">
+		<%= f.input :title, class: "form-control" %>
+	</div>
+
+	<div class="form-group">
+		<%= f.input :body, :as => :ckeditor, input_html: {:ckeditor => {:toolbar => 'FULL'}}, class: "form-control" %>
+	</div>
+
+	<br>
+	<br>
+
+	<div class="form-group">
+		<% f.submit %>
+	</div>
+<% end %>
